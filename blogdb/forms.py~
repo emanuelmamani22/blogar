@@ -4,8 +4,8 @@ from .models import Post
 
 
 class EntradaForm(forms.Form):
-     titulo_blog = forms.Charfield(max_length=200)
-     texto = forms.TextField()
+     titulo_blog = forms.CharField(max_length=200)
+     texto = comment = forms.CharField(widget=forms.Textarea)
      
      def clean_titulo_blog(self):
         """Comprueva que no exista otra entrada con el mismo nombre"""

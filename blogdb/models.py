@@ -14,7 +14,6 @@ class Categoria(models.Model):
 class Post(models.Model):
      titulo = models.CharField(max_length=200)
      slug = models.SlugField(max_length=200)
-     category = models.ForeignKey(Categoria)
      contenido = models.TextField()
      publico = models.BooleanField(default=True)
      autor = models.ForeignKey(User)
