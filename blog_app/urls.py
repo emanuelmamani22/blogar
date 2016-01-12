@@ -20,5 +20,6 @@ from blogdb import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index' ),
-    url(r'^entrada/$', views.entrada, name='entrada')
+    url(r'^entrada/$', views.entrada, name='entrada'),
+    url(r'^register/$', views.registrar, name='register'),
 ]
