@@ -13,19 +13,22 @@ def index(request):
 
 
 def entrada(request):
-   if request.method == 'POST':
-     form=EntradaForm(request.POST)
-     if form.is_valid():
-       titulo_b=request.POST['titulo']
-       texto_b=request.POST['texto']
-       usuario=request.user
-       entrada_b=Post(titulo=titulo_b, contenido=texto_b, autor=asuario)
-       entrada_b.save()
-       return HttpResponseRedirect('/')
+   if request.user.is_authenticated():
+     if request.method == 'POST':
+       form=EntradaForm(request.POST)
+       if form.is_valid():
+         titulo_b=request.POST['titulo_blog']
+         texto_b=request.POST['texto']
+         usuario=request.user
+         entrada_b=Post(titulo=titulo_b, contenido=texto_b, autor=usuario)
+         entrada_b.save()
+         return HttpResponseRedirect('/')
+       else :
+           return render(request, 'entrada.html', {'form':form})
      else :
-         return render(request, 'entrada.html', {'form':form})
+         form = EntradaForm()
    else :
-       form = EntradaForm()
+     return HttpResponseRedirect('/login')
    return render(request, 'entrada.html', {'form':form})
 
 
