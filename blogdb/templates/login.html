@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+{% if not user.is_authenticated %}
+<h1>Login</h1>
+{% if mensaje %}
+ {{mensaje}}
+{% endif %}
+<form action="" method="post">{% csrf_token %}
+{{form.as_p}}
+<input type="submit" value="Enviar"/>
+</form>
+{% endif %}
+{% endblock %}
