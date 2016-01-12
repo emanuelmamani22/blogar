@@ -24,7 +24,7 @@ class Post(models.Model):
      
      def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not getattr(self, 'slug'):
-              self.slug = slugify(self.title)
+              self.slug = slugify(self.titulo)
               super(Post, self).save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields) 
      
      
