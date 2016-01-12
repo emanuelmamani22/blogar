@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-{{hola}}
+{% if not user.is_authenticated %}
+<a href="{% url 'login' %}">Login</a></b></p><a href="{% url 'register' %}">Registrarse</a></b></p>
+{% endif %}
+{% if user.is_authenticated %}
+{{hola}} {{ user.username }} <a href="{% url 'logout' %}">Cerrar Sesion</a>
+{% endif %}
 {% endblock %}
 
