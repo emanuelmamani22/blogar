@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import Post
 from .forms import EntradaForm, RegistrarUser, LoginForm
 from django.contrib.auth import authenticate, login, logout
+from .funciones import generar_codigo
 
 # Create your views here.
 
@@ -20,7 +21,8 @@ def entrada(request):
          titulo_b=request.POST['titulo_blog']
          texto_b=request.POST['texto']
          usuario=request.user
-         entrada_b=Post(titulo=titulo_b, contenido=texto_b, autor=usuario)
+         codigo = generar_codigo()
+         entrada_b=Post(titulo=titulo_b, contenido=texto_b, autor=usuario, codigo_e=codigo)
          entrada_b.save()
          return HttpResponseRedirect('/')
        else :
