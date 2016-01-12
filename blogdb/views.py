@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import EntradaForm, RegistrarUser
+from .forms import EntradaForm, RegistrarUser, LoginForm
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -47,3 +48,30 @@ def registrar(request):
    else :
         form=RegistrarUser()
    return render(request, 'registro.html', {'form':form})
+
+def login_views(request):
+   mensaje=None
+   if request.method == 'POST':
+     form = LoginForm(request.POST)
+     if form.is_valid():
+       user_f = request.POST['username']
+       password_f = request.POST['password']
+       user = authenticate(username=user_f, password=password_f)
+       if user is not None:
+          if user.is_active:
+             login(request, user)
+             return HttpResponseRedirect('/')
+          else :
+             mensaje = "Tu usuario no esta activo"
+       else :
+          mensaje = "Nombre de usuario y/o password incorrectos"
+     else :
+       return render(request, 'login.html', {'mensaje':mensaje, 'form':form})
+   else :
+     form = LoginForm()
+   return render(request, 'login.html', {'mensaje':mensaje, 'form':form})
+
+def logout_views(request):
+    logout(request) 
+    # Redireccciona a una pagina de entrada correcta.    
+    return HttpResponseRedirect('/')
