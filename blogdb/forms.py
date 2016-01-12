@@ -41,3 +41,8 @@ class RegistrarUser(forms.Form):
         if password != password2:
            raise forms.ValidationError('El password no coincide')
         return password2
+
+
+class LoginForm(forms.Form):
+     username = forms.CharField(min_length=5)
+     password = forms.CharField(min_length=5, widget=forms.PasswordInput())
