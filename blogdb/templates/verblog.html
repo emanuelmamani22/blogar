@@ -2,7 +2,16 @@
 {% load django_markdown %}
 {% block title %}{{ e.titulo }}{% endblock %}
 {% block content %}
-
-<p>{{e.contenido|markdown|safe}}</p>
+<p>{{e.contenido|markdown}}</p>
+{% if mensaje %}
+ {{mensaje}}
+{% endif %}
+<form action="" method="post">{% csrf_token %}
+{{form.as_p}}
+<input type="submit" value="Enviar"/>
+</form>
+{% for x in c %}
+{{ x.contenido_c }}
+{% endfor %}
 {% endblock %}
 
