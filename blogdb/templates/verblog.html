@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load django_markdown %}
 {% block title %}{{ e.titulo }}{% endblock %}
 {% block content %}
 
-<p>{{e.contenido}}</p>
+<p>{{e.contenido|markdown|safe}}</p>
 {% endblock %}
 
