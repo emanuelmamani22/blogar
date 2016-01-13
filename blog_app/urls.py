@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^register/$', views.registrar, name='register'),
     url(r'^login/$', views.login_views, name='login'),
     url(r'^logout/$', views.logout_views, name='logout'),
+    url(r'^verblog/([^/]+)/([^/]+)/$', views.verblog, name='verblog'),
 ]
