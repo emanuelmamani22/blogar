@@ -80,3 +80,7 @@ def logout_views(request):
     logout(request) 
     # Redireccciona a una pagina de entrada correcta.    
     return HttpResponseRedirect('/')
+
+def verblog(request, codigo, slug):
+   e = Post.objects.get(codigo_e=codigo, slug=slug)
+   return render(request, 'verblog.html', {'e':e})
