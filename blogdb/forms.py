@@ -46,3 +46,6 @@ class RegistrarUser(forms.Form):
 class LoginForm(forms.Form):
      username = forms.CharField(min_length=5)
      password = forms.CharField(min_length=5, widget=forms.PasswordInput())
+
+class Comentar(forms.Form):
+     comentario = forms.CharField(widget=forms.Textarea)
