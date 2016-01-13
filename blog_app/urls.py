@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^login/$', views.login_views, name='login'),
     url(r'^logout/$', views.logout_views, name='logout'),
     url(r'^verblog/([^/]+)/([^/]+)/$', views.verblog, name='verblog'),
+    url('^markdown/', include( 'django_markdown.urls')),
 ]
