@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from .models import Post
-from .forms import EntradaForm, RegistrarUser, LoginForm
+from .models import Post, Comentario
+from .forms import EntradaForm, RegistrarUser, LoginForm, Comentar
 from django.contrib.auth import authenticate, login, logout
 from .funciones import generar_codigo
 
@@ -83,4 +83,18 @@ def logout_views(request):
 
 def verblog(request, codigo, slug):
    e = Post.objects.get(codigo_e=codigo, slug=slug)
-   return render(request, 'verblog.html', {'e':e})
+   cc = e.id
+   try :
+       c = Comentario.objects.filter(codigo_p=cc)
+   except :
+       c=None
+   if request.method == 'POST':
+      form=Comentar(request.POST)
+      if form.is_valid():
+        comentario_f = request.POST['comentario']
+        insertar = Comentario(contenido_c=comentario_f, codigo_p=e)
+        insertar.save()
+        return HttpResponseRedirect('/verblog/'+codigo+'/'+slug)
+   else :
+      form=Comentar()
+   return render(request, 'verblog.html', {'e':e, 'c':c,'form':form})
